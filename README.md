@@ -77,6 +77,10 @@ jQuery: Для динамического взаимодействия с эле
 
 ### Скриншоты работы
 ![Скриншот](project/main-page-test.png)
+**Страница отсортирована по названию:**
 ![Скриншот 2](project/main-page-sort.png)
+**Футер**
 ![Скриншот 3](project/main-page-footer.png)
+**Адаптив:**
+![Скриншот адаптив](project/adaptive.png)
 
