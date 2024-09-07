@@ -1,0 +1,267 @@
+/*--------------------------------------------------------------
+# Общие стили и классы
+--------------------------------------------------------------*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+}
+
+header h1, footer p {
+    margin: 0;
+}
+
+/*--------------------------------------------------------------
+# Стили фильтров
+--------------------------------------------------------------*/
+.filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    background-color: #fff;
+    flex-wrap: wrap;
+}
+
+.filters label {
+    margin-right: 0.5em;
+}
+
+.filters select {
+    margin-right: 1em;
+    padding: 0.5em;
+}
+
+/*--------------------------------------------------------------
+# Сетка продуктов
+--------------------------------------------------------------*/
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5em;
+    padding: 2em;
+}
+
+
+/*--------------------------------------------------------------
+# Карточка продукта
+--------------------------------------------------------------*/
+.product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    transition: transform 0.3s;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-card h2 {
+    font-size: 1.2em;
+    margin: 0.5em 0;
+}
+
+.product-card p {
+    flex-grow: 1;
+    color: #555;
+}
+
+.price {
+    font-weight: bold;
+    margin: 0.5em 0;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 0.7em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Карточка товара, которая заблокирована */
+.product-card.inactive {
+    opacity: 0.5;
+    pointer-events: none;
+    background-color: #f8d7da;
+
+}
+
+/* Стиль для текста "Заблокирован" */
+.product-card .status {
+    color: #dc3545;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1em;
+}
+
+
+/*--------------------------------------------------------------
+# Сообщение "Нет продуктов"
+--------------------------------------------------------------*/
+.no-products {
+    text-align: center;
+    font-size: 1.2em;
+    color: #777;
+    padding: 2em;
+}
+
+/*--------------------------------------------------------------
+# Модальное окно
+--------------------------------------------------------------*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 2em;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+}
+
+.modal-content button {
+    padding: 0.7em 1.5em;
+    margin: 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#confirm-delete {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+#confirm-delete:hover {
+    background-color: #c0392b;
+}
+
+#cancel-delete {
+    background-color: #bdc3c7;
+    color: #fff;
+}
+
+#cancel-delete:hover {
+    background-color: #95a5a6;
+}
+
+/*--------------------------------------------------------------
+# Адаптив
+--------------------------------------------------------------*/
+
+/* Для экранов шириной меньше 500px: 2 колонки */
+@media (max-width: 500px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Для экранов шириной меньше 300px: 1 колонка */
+@media (max-width: 300px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*--------------------------------------------------------------
+# Анимация прелоадера
+--------------------------------------------------------------*/
+@keyframes animate-preloader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*--------------------------------------------------------------
+# Прелоадер
+--------------------------------------------------------------*/
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: animate-preloader 1s linear infinite;
+}
+
+#scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 20px;
+    display: none;
+}

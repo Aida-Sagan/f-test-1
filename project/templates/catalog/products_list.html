@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список продуктов магазина "ВкусЖизни"</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'catalog/css/products_list.css' %}">
+</head>
+<body>
+<header>
+    <h1>Наши Продукты</h1>
+</header>
+
+<section class="filters">
+    <label for="category-filter">Категория:</label>
+    <select id="category-filter">
+        <option value="">Все</option>
+        {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="sort-by">Сортировать по:</label>
+    <select id="sort-by">
+        <option value="name">Название</option>
+        <option value="price">Цена</option>
+    </select>
+</section>
+
+<main>
+    {% if products %}
+    <div class="products-grid">
+        {% for product in products %}
+        <article class="product-card {% if not product.is_active %}inactive{% endif %}" data-category="{{ product.category.id }}">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description|truncatewords:20 }}</p>
+            <div class="price">${{ product.price }}</div>
+            {% if product.is_active %}
+            <button class="delete-button" data-id="{{ product.id }}">Удалить</button>
+            {% else %}
+            <p class="status">Нет в наличии</p>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="no-products">Нет доступных продуктов.</p>
+    {% endif %}
+</main>
+
+<footer>
+    <p>&copy; 2024 Аида Касенгалиева</p>
+</footer>
+
+<!-- Confirmation Modal -->
+<div id="confirmation-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <p>Вы уверены, что хотите удалить этот продукт?</p>
+        <button id="confirm-delete">Да</button>
+        <button id="cancel-delete">Нет</button>
+    </div>
+</div>
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div class="spinner"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'catalog/js/products_list.js' %}" defer></script>
+</body>
+</html>
